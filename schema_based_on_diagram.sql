@@ -41,10 +41,21 @@ CREATE TABLE invoice_items(
 
 CREATE TABLE medical_histories_treatments(
     id INT GENERATED ALWAYS AS IDENTITY,
-    medical_history_id INT REFERENCES medical_histories(medical_history_id),
-    treatment_id INT REFERENCES treatments(treatment_id),
+    medical_history_id INT,
+    treatment_id INT,
+    CONSTRAINT fk_medical_histories_treatment_medical_histories FOREIGN KEY(medical_history_id) REFERENCES medical_histories(id),
+    CONSTRAINT fk_medical_histories_treatment_treatments FOREIGN KEY(treatment_id ) REFERENCES treatments(id),
     PRIMARY KEY(id)
 );
+
+CREATE INDEX patient_index ON medical_histories(patient_id);
+CREATE INDEX treatment_index ON invoice_items(treatment_id);
+CREATE INDEX medical_history_index ON invoices(medical_history_id);
+CREATE INDEX invoice_index ON invoice_items(invoice_id);
+CREATE INDEX medical_history_medical_histories_treatments_index ON medical_histories_treatments(medical_history_id);
+CREATE INDEX treatment_medical_histories_treatments_index ON medical_histories_treatments(treatment_id);
+
+
 
 
 
