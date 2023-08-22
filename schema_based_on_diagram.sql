@@ -39,5 +39,12 @@ CREATE TABLE invoice_items(
     PRIMARY KEY(id)
 );
 
+CREATE TABLE medical_histories_treatments(
+    id INT GENERATED ALWAYS AS IDENTITY,
+    medical_history_id INT REFERENCES medical_histories(medical_history_id),
+    treatment_id INT REFERENCES treatments(treatment_id),
+    PRIMARY KEY(id)
+);
+
 
 
